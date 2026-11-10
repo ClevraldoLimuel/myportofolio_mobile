@@ -1,0 +1,1 @@
+"# myportofolio_mobile"  initgit add README.mdgit commit -m "Tutorial 08: Basic Flutter" git branch -M maingit remote add origin https://github.com/ClevraldoLimuel/myportofolio_mobile.gitgit push -u origin main
