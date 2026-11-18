@@ -6,7 +6,7 @@ NPM : 2506656583
 
 Kelas: PBP B
 
-## WEEK 1
+## WEEK 8
 Progress:
 Menyelesaikan setup awal (project flutter)
 
