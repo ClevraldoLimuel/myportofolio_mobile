@@ -39,6 +39,7 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Home'),
             // Navigasi ke halaman utama portofolio
             onTap: () {
+              Navigator.popUntil(context, (route) => route.isFirst);
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => MyHomePage()),
@@ -50,6 +51,7 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Add Project'),
             // Navigasi ke halaman tambah proyek
             onTap: () {
+              Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ProjectFormPage()),
@@ -61,6 +63,7 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Add Experience'),
             // Navigasi ke halaman tambah proyek
             onTap: () {
+              Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ExperienceFormPage()),
