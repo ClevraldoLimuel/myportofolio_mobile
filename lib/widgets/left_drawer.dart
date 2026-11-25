@@ -2,6 +2,9 @@ import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
+import 'package:provider/provider.dart';
 
 // TODO: Impor halaman ProjectFormPage jika sudah dibuat
 
@@ -10,6 +13,7 @@ class LeftDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLoggedIn = context.watch<AuthState>().isLoggedIn;
     return Drawer(
       child: ListView(
         children: [
@@ -68,6 +72,22 @@ class LeftDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => ExperienceFormPage()),
               );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_circle_outline),
+            title: isLoggedIn ? const Text("Logout") : const Text("Login"),
+            // Navigasi ke halaman tambah proyek
+            onTap: () {
+              Navigator.pop(context);
+              if (isLoggedIn) {
+                context.read<AuthState>().logout();
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(SnackBar(content: Text("Berhasil Logout!")));
+              } else {
+                ensureLoggedIn(context);
+              }
             },
           ),
         ],

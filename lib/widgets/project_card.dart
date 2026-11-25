@@ -2,6 +2,10 @@ import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/screens/project_list_screen.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
+import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
@@ -29,6 +33,7 @@ class ItemCard extends StatelessWidget {
           // Navigate ke halaman yang sesuai
           if (item.name == "Tambah Proyek") {
             // TODO: Gunakan Navigator.push() untuk melakukan navigasi ke MaterialPageRoute yang mencakup ProjectFormPage
+            ensureLoggedIn(context);
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ProjectFormPage()),
@@ -37,10 +42,23 @@ class ItemCard extends StatelessWidget {
 
           if (item.name == "Tambah Pengalaman") {
             // TODO: Gunakan Navigator.push() untuk melakukan navigasi ke MaterialPageRoute yang mencakup ProjectFormPage
+            ensureLoggedIn(context);
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ExperienceFormPage()),
             );
+          }
+          if (item.name == "Lihat Proyek") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProjectListScreen()),
+            );
+          }
+          if (item.name == "Logout" && context.read<AuthState>().isLoggedIn) {
+            context.read<AuthState>().logout();
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(SnackBar(content: Text("Berhasil Logout!")));
           }
         },
         child: Container(
